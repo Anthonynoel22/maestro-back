@@ -46,3 +46,6 @@ psql (17.2 (Ubuntu 17.2-1.pgdg24.04+1))
 Saisissez « help » pour l'aide.
 
 maestro=>
+
+CREATE USER maestro WITH PASSWORD 'maestro';
+CREATE DATABASE maestro WITH OWNER maestro;
