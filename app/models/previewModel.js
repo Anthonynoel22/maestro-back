@@ -27,7 +27,7 @@ Preview.init(
         isStar: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            validate: { notEmpty: true }
+            defaultValue: false
         }
     },
     {
@@ -37,3 +37,5 @@ Preview.init(
         timestamps: true,
     }
 );
+
+export default Preview;

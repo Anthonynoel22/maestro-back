@@ -23,4 +23,6 @@ Genre.init(
         tableName: "genre",
         timestamps: true,
     }
-)
+);
+
+export default Genre;

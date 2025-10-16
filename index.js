@@ -1,6 +1,8 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import sequelize from "./app/db/database.js";
+import Preview from "./app/models/previewModel.js";
+import Genre from "./app/models/genreModel.js";
 
 dotenv.config();
 
