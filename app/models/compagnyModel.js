@@ -20,7 +20,7 @@ Company.init(
 
         // Numéro de SIRET de l’entreprise
         siret: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allownull: false,
             unique: true,
         },

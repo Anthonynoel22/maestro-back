@@ -1,0 +1,13 @@
+### Récupérer les entreprises
+GET http://localhost:3000/api/admin/company
+Content-Type: application/json
+
+### creation d'une entreprise
+POST http://localhost:3000/api/company
+Content-Type: application/json
+
+{
+    "name": "Entreprise créée",
+    "siret": "51234567891234",
+    "localisation": "Pau"
+}
