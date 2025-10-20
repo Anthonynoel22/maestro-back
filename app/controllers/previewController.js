@@ -14,6 +14,16 @@ const previewController = {
             console.error("Erreur lors de la recherche des extraits", error);
             res.status(500).json({error: "Erreur interne du serveur"});
         }
+    },
+
+    findByFilter: async (req, res) => {
+        try {
+            
+            
+        } catch (error) {
+            console.error("Erreur lors de la recherche des extraits filtrés : ", error);
+            res.status(500).json({error: "Erreur interne du serveur"});
+        }
     }
 
 
