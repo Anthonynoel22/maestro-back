@@ -18,6 +18,7 @@ const previewController = {
 
     findByFilter: async (req, res) => {
         try {
+            // if ...
             const genreSelected = req.query.genre;
             const previews = await Preview.findAll({
                 where: {
