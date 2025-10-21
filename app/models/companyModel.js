@@ -15,20 +15,20 @@ Company.init(
         // Nom de l’entreprise
         name: {
             type: DataTypes.STRING,
-            allownull: false,
+            allowNull: false,
         },
 
         // Numéro de SIRET de l’entreprise
         siret: {
             type: DataTypes.STRING,
-            allownull: false,
+            allowNull: false,
             unique: true,
         },
 
         // Adresse de localisation de l’entreprise
         localisation: {
             type: DataTypes.STRING,
-            allownull: false,
+            allowNull: false,
         },
     },
     {

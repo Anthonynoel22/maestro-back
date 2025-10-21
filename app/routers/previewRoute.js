@@ -9,6 +9,6 @@ previewRoute.get('/preview', previewController.findAll)
 
 
 // GET /api/preview/filter?
-previewRoute.get('/preview/filter?', previewController.findByFilter)
+previewRoute.get('/preview/filter', previewController.findByFilter)
 
 export default previewRoute;
