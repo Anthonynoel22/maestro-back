@@ -1,11 +1,20 @@
 ### Récupérer les entreprises
-GET http://localhost:3000/api/admin/company
-Content-Type: application/json
+# GET http://localhost:3000/api/admin/company
+# Content-Type: application/json
 
-### creation d'une entreprise
-POST http://localhost:3000/api/company
-Content-Type: application/json
+# ### creation d'une entreprise
+# POST http://localhost:3000/api/company
+# Content-Type: application/json
 
+# {
+#     "name": "Entreprise créée",
+#     "siret": "51234567891234",
+#     "localisation": "Pau"
+# }
+
+### Récupérer tous les extraits
+GET http://localhost:3000/api/preview
+Content-Type: application/json
 {
     "name": "Entreprise créée",
     "siret": "51234567891234",
@@ -32,3 +41,62 @@ Content-Type: application/json
     "email": "emma.postgres@exemple.com",
     "password": "gargouille2025"
 }
+### Récupérer les messages
+GET http://localhost:3000/api/message-contact
+Content-Type: application/json
+
+### créer un message
+POST   http://localhost:3000/api/message-contact/
+Content-Type: application/json
+
+{
+    "mail": "test@mail.com",
+    "message": "Je suis un test de message"
+}
+
+
+### modifier les messages
+PATCH  http://localhost:3000/api/message-contact/5
+Content-Type: application/json
+
+{
+    "status": "lu"
+}
+### Récupérer les genres
+GET http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+
+### creation d'une genre
+POST http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+{
+    "label": "Pop Rock"
+}
+
+### Modification d'un genre
+PATCH http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+{
+    "label": "Classique"
+}
+
+### Suppression d'un genre 
+DELETE http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+
+### Modification d'une entreprise
+PATCH http://localhost:3000/api/company/4
+Content-Type: application/json
+
+{
+    "name": "Entreprise modifiée"
+}
+
+### Suppression d'une entreprise
+DELETE http://localhost:3000/api/company/1
+Content-Type: application/json
+

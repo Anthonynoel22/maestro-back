@@ -20,6 +20,11 @@ MessageContact.init(
             type: DataTypes.TEXT,
             allowNull: false,
         },
+
+        status: {
+            type: DataTypes.STRING(200),
+            defaultValue: "non lu",
+        }
     },
 
     {

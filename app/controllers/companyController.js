@@ -33,8 +33,40 @@ const companyController = {
             console.error("Erreur lors de la création de l'entreprise : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});
         }
-    }
+    },
 
+    // PATCH /api/company/:id
+    update: async (req, res) => {
+        try {
+            console.log(req.body);
+            const datas = req.body;
+            const company = await Company.findByPk(req.params.id);
+            if (!company) {
+                return res.status(404).json({message : "Entreprise non trouvée"});
+            };
+            await company.update(datas);
+            res.json(company);
+        } catch (error) {
+            console.error("Erreur lors de la modification de l'entreprise : ", error);
+            res.status(500).json({error: "Erreur interne du serveur"});
+        }
+    },
+
+    delete: async (req, res) => {
+        try {
+            const id = req.params.id;
+            console.log(id);
+            const company = await Company.findByPk(id);
+            if (!company) {
+                return res.status(404).json({message : "Entreprise non trouvée"});
+            };
+            await company.destroy();
+            res.status(200).json({message: 'Entreprise supprimée'});
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'entreprise : ", error);
+            res.status(500).json({error: "Erreur interne du serveur"});
+        }
+    }
 
 }
 
