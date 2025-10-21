@@ -11,3 +11,16 @@ Content-Type: application/json
     "siret": "51234567891234",
     "localisation": "Pau"
 }
+
+### Modification d'une entreprise
+PATCH http://localhost:3000/api/company/4
+Content-Type: application/json
+
+{
+    "name": "Entreprise modifiée"
+}
+
+### Suppression d'une entreprise
+DELETE http://localhost:3000/api/company/1
+Content-Type: application/json
+
