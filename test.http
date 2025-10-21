@@ -15,3 +15,47 @@
 ### Récupérer tous les extraits
 GET http://localhost:3000/api/preview
 Content-Type: application/json
+{
+    "name": "Entreprise créée",
+    "siret": "51234567891234",
+    "localisation": "Pau"
+}
+
+### Récupérer les genres
+GET http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+
+### creation d'une genre
+POST http://localhost:3000/api/admin/genre
+Content-Type: application/json
+
+{
+    "label": "Pop Rock"
+}
+
+### Modification d'un genre
+PATCH http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+{
+    "label": "Classique"
+}
+
+### Suppression d'un genre 
+DELETE http://localhost:3000/api/admin/genre/3
+Content-Type: application/json
+
+
+### Modification d'une entreprise
+PATCH http://localhost:3000/api/company/4
+Content-Type: application/json
+
+{
+    "name": "Entreprise modifiée"
+}
+
+### Suppression d'une entreprise
+DELETE http://localhost:3000/api/company/1
+Content-Type: application/json
+

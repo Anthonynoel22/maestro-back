@@ -10,8 +10,9 @@ companyRoute.get('/admin/company', companyController.findAll)
 companyRoute.post('/company', companyController.create)
 
 // PATCH /api/company/:idCompany
-
+companyRoute.patch('/company/:id', companyController.update)
 
 // DELETE /api/company/:idCompany
+companyRoute.delete('/company/:id', companyController.delete)
 
 export default companyRoute;

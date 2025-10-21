@@ -6,7 +6,6 @@ import MessageContact from "./app/models/messageContactModel.js";
 import { User, Projet, Company, Preview, Genre } from "./app/models/index.js";
 import router from "./app/routers/router.js";
 
-
 dotenv.config();
 
 const app = express();
@@ -31,6 +30,5 @@ async function main() {
         console.error("❌ Erreur de connexion à la base :", error);
     }
 }
-
 
 main();
