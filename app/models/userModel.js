@@ -43,7 +43,7 @@ User.init(
 
         // Numero de telephone
         phonenumber: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allownull: false,
             // unique: true,
         },
