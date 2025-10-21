@@ -21,6 +21,27 @@ Content-Type: application/json
     "localisation": "Pau"
 }
 
+### Récupérer les messages
+GET http://localhost:3000/api/message-contact
+Content-Type: application/json
+
+### créer un message
+POST   http://localhost:3000/api/message-contact/
+Content-Type: application/json
+
+{
+    "mail": "test@mail.com",
+    "message": "Je suis un test de message"
+}
+
+
+### modifier les messages
+PATCH  http://localhost:3000/api/message-contact/5
+Content-Type: application/json
+
+{
+    "status": "lu"
+}
 ### Récupérer les genres
 GET http://localhost:3000/api/admin/genre
 Content-Type: application/json
