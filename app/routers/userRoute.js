@@ -25,12 +25,12 @@ userRoute.post("/user/logout", userController.logout);
 userRoute.get("/user/profile", authenticate, userController.profile);
 
 // Modifier ses informations
-// PATCH/api/user/:idUser
+// PATCH/api/user
 userRoute.patch("/user", authenticate, userController.modify);
 
 // Supprimer un utilisateur (désactiver)
-// DELETE/api/user/:idUser
-// userRoute.delete('/user/:idUser', userController.quelque chose)
+// DELETE/api/user
+// userRoute.delete('/user', userController.quelque chose)
 
 // Voir la liste des utilisateurs
 // GET/api/admin/user
