@@ -11,15 +11,30 @@ Content-Type: application/json
     "siret": "51234567891234",
     "localisation": "Pau"
 }
+### Récupérer les entreprises
+GET http://localhost:3000/api/admin/company
+Content-Type: application/json
 
-### Récupérer tous les extraits
-GET http://localhost:3000/api/preview
+### creation d'une entreprise
+GET http://localhost:3000/api/company
 Content-Type: application/json
 {
     "name": "Entreprise créée",
     "siret": "51234567891234",
     "localisation": "Pau"
 }
+
+### Modification d'une entreprise
+PATCH http://localhost:3000/api/company/4
+Content-Type: application/json
+
+{
+    "name": "Entreprise modifiée"
+}
+
+### Suppression d'une entreprise
+DELETE http://localhost:3000/api/company/1
+Content-Type: application/json
 
 ### creation d'un user
 POST http://localhost:3000/api/user
@@ -41,6 +56,14 @@ Content-Type: application/json
     "email": "emma.postgres@exemple.com",
     "password": "gargouille2025"
 }
+
+### trier les user
+GET http://localhost:3000/api/admin/user/filter?lastnameSelected
+Content-Type: application/json
+
+### lister les user
+GET http://localhost:3000/api/admin/user
+Content-Type: application/json
 ### Récupérer les messages
 GET http://localhost:3000/api/message-contact
 Content-Type: application/json
@@ -54,7 +77,6 @@ Content-Type: application/json
     "message": "Je suis un test de message"
 }
 
-
 ### modifier les messages
 PATCH  http://localhost:3000/api/message-contact/5
 Content-Type: application/json
@@ -62,6 +84,7 @@ Content-Type: application/json
 {
     "status": "lu"
 }
+
 ### Récupérer les genres
 GET http://localhost:3000/api/admin/genre
 Content-Type: application/json
@@ -88,16 +111,38 @@ DELETE http://localhost:3000/api/admin/genre/3
 Content-Type: application/json
 
 
-### Modification d'une entreprise
-PATCH http://localhost:3000/api/company/4
+### listes des projets
+GET http://localhost:3000/api/admin/project/
+Content-Type: application/json
+
+### trier les projets par statuts
+GET http://localhost:3000/api/admin/project/filter?status=en attente d'acceptatio
+Content-Type: application/json
+
+### modifier le statut
+PATCH http://localhost:3000/api/admin/project/1
+Content-Type: application/json
+
+### supprimer le projet
+DELETE http://localhost:3000/api/admin/project/2
+Content-Type: application/json
+
+
+### faire une demande de projet
+POST http://localhost:3000/api/project
 Content-Type: application/json
 
 {
-    "name": "Entreprise modifiée"
+    "name": "toto"
 }
 
-### Suppression d'une entreprise
-DELETE http://localhost:3000/api/company/1
+### voir la liste de ses projets
+GET http://localhost:3000/api/project
+Content-Type: application/json
+
+
+### trier par statut
+GET http://localhost:3000/api/project
 Content-Type: application/json
 
 
@@ -123,4 +168,11 @@ Content-Type: application/json
 
 ### Suppression d'une description
 DELETE http://localhost:3000/api/admin/description/2
+Content-Type: application/json
+### Récupérer tous les extraits filtrés par genre jazz
+GET http://localhost:3000/api/preview/filter?genre=jazz
+Content-Type: application/json
+
+### Récupérer tous les extraits triés par dates
+GET http://localhost:3000/api/preview/filter
 Content-Type: application/json

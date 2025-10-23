@@ -5,7 +5,7 @@ import { User, Projet, Company, Preview, Genre, MessageContact, Description } fr
 try {
     await sequelize.sync({ force: true });
     
-    // compagny
+//     company
     await Company.create({
         name: 'Entreprise 1',
         siret: "12345678912345",
@@ -31,15 +31,18 @@ try {
 
     await Preview.create({
         title: "Extrait 1",
-        isStar: false
+        isStar: false,
+        date: new Date("2025-01-01")
     }),
     await Preview.create({
         title: "Extrait 2",
-        isStar: false
+        isStar: false,
+        date: new Date("2025-03-03")
     }),
     await Preview.create({
         title: "Extrait 3",
-        isStar: true
+        isStar: true,
+        date: new Date("2025-05-05")
     })
 
     // messages-contact
@@ -74,6 +77,22 @@ try {
     });
 
 
+    await Genre.create({
+        label: "classique"
+    });
+    await Genre.create({
+        label: "rock"
+    });
+    await Genre.create({
+        label: "jazz"
+    });
+
+    const genres = await Genre.findAll();
+    const previews = await Preview.findAll();
+
+    await previews[0].addListGenres([genres[0], genres[2]]);
+    await previews[1].addListGenres([genres[1], genres[2]]);
+    await previews[2].addListGenres([genres[0]]);
 
 } catch (error) {
     console.error(error);
