@@ -11,17 +11,22 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// permet de décoder le corps au format JSON de la requête HTTP
+// Permet de décoder le corps au format JSON de la requête HTTP
 app.use(express.json());
 
+// Routes
 app.use(router);
 
-// Connexion à la base
+// Route racine
+app.get("/", (req, res) => {
+    res.send("Bienvenue sur l'API Maestro !");
+});
+
+// Connexion à la base et lancement du serveur
 async function main() {
     try {
         await sequelize.authenticate();
         console.log("✅ Connexion à la base réussie");
-        // sequelize.sync({ alter: true });
 
         app.listen(port, () => {
             console.log(`🚀 Serveur lancé sur http://localhost:${port}`);

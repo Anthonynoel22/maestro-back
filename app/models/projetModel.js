@@ -1,49 +1,55 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../db/database.js";
+import User from "./userModel.js"; // adapte le chemin si nécessaire
+import Company from "./companyModel.js";
+import Genre from "./genreModel.js";
+import Preview from "./previewModel.js";
 
 class Projet extends Model {}
 
 Projet.init(
-    {
-        // Identifiant unique du projet
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-
-        // Nom du projet
-        name: {
-            type: DataTypes.STRING,
-            allownull: false,
-        },
-
-        // Statut du projet(à commencer, en cours, en attente de retour, terminé)
-        status: {
-            type: DataTypes.ENUM(
-                "à commencer",
-                "en cours",
-                "en attente de retour",
-                "terminé",
-                "en attente d'acceptation"
-            ),
-            defaultValue: "en attente d'acceptation",
-        },
-
-        // Date limite du projet(facultative)
-        deadline: {
-            type: DataTypes.DATEONLY,
-            allownull: true,
-        },
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        sequelize,
-        modelName: "Projet",
-        tableName: "projet",
-        // On pourra avoir la date de création et de modification du projet
-        // (Du coup pas de champs "date de création du projet" dans la table -> remplacé par "created_at" ).
-        timestamps: true,
-    }
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        "à commencer",
+        "en cours",
+        "en attente de retour",
+        "terminé",
+        "en attente d'acceptation"
+      ),
+      defaultValue: "en attente d'acceptation",
+    },
+    deadline: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+  },
+  {
+    sequelize,
+    modelName: "Projet",
+    tableName: "projet",
+    timestamps: true,
+  }
 );
+
+// Associations
+Projet.belongsTo(User, { foreignKey: "user_id", as: "user" });
+Projet.belongsTo(Company, { foreignKey: "company_id", as: "company" });
+Projet.belongsToMany(Genre, {
+  through: "projet_genre",
+  foreignKey: "projet_id",
+  otherKey: "genre_id",
+  as: "genres",
+});
+Projet.hasMany(Preview, { foreignKey: "projet_id", as: "previews" });
 
 export default Projet;
