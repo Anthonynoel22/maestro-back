@@ -13,7 +13,7 @@ userRoute.post("/user/login", userController.login);
 
 // Modifier ses informations
 // PATCH/api/user/:idUser
-// userRoute.patch('/user/:idUser', userController.quelque chose)
+userRoute.patch("/user/:idUser", userController.modify);
 
 // Supprimer un utilisateur (désactiver)
 // DELETE/api/user/:idUser
@@ -21,14 +21,14 @@ userRoute.post("/user/login", userController.login);
 
 // Voir la liste des utilisateurs
 // GET/api/admin/user
-// userRoute.get('/admin/user', userController.quelque chose)
+userRoute.get("/admin/user", userController.findAll);
+
+// Trier les utilisateurs
+// GET/api/admin/user/(filtre)
+userRoute.get("/admin/user/filter", userController.sort);
 
 // Voir un seul utilisateur
 // GET/api/admin/user/:idUser
-// userRoute.get('/admin/user/:idUser', userController.quelque chose)
-
-// Filtrer les utilisateurs
-// GET/api/admin/user/(filtre)
-// userRoute.get('/admin/user/(filtre)', userController.quelque chose)
+userRoute.get("/admin/user/:idUser", userController.findByPk);
 
 export default userRoute;
