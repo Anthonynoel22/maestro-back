@@ -3,7 +3,8 @@ import Genre from "./genreModel.js";
 import User from "./userModel.js";
 import Company from "./companyModel.js";
 import Projet from "./projetModel.js";
-import MessageContact from "./messageContactModel.js";
+import MessageContact from "./messageContactModel.js"
+import Description from "./descriptionModel.js";
 
 // -------------------------
 // TABLE DE LIAISON GENRE / PREVIEW
@@ -57,4 +58,5 @@ Company.hasMany(User, {
     as: "users"
 });
 
-export { User, Projet, Company, Preview, Genre, MessageContact };
+export { User, Projet, Company, Preview, Genre, MessageContact, Description };
+

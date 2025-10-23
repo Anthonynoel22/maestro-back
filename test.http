@@ -1,3 +1,16 @@
+## Récupérer les entreprises
+GET http://localhost:3000/api/admin/company
+Content-Type: application/json
+
+### creation d'une entreprise
+POST http://localhost:3000/api/company
+Content-Type: application/json
+
+{
+    "name": "Entreprise créée",
+    "siret": "51234567891234",
+    "localisation": "Pau"
+}
 ### Récupérer les entreprises
 GET http://localhost:3000/api/admin/company
 Content-Type: application/json
@@ -133,6 +146,29 @@ GET http://localhost:3000/api/project
 Content-Type: application/json
 
 
+### creation d'une description
+POST http://localhost:3000/api/admin/description
+Content-Type: application/json
+
+{
+    "title": "Nouveau titre",
+    "image_link": "lien à venir",
+    "text": "Nouvelle description"
+}
+
+
+### Modification d'une description
+PATCH http://localhost:3000/api/admin/description/1
+Content-Type: application/json
+
+{
+    "text": "Modification description"
+}
+
+
+### Suppression d'une description
+DELETE http://localhost:3000/api/admin/description/2
+Content-Type: application/json
 ### Récupérer tous les extraits filtrés par genre jazz
 GET http://localhost:3000/api/preview/filter?genre=jazz
 Content-Type: application/json
