@@ -1,4 +1,5 @@
 import { User, Projet, Company, Preview, Genre } from "../models/index.js";
+import { unlink } from 'node:fs/promises';
 
 const previewController = {
 
@@ -80,6 +81,7 @@ const previewController = {
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
+            // preview.link
             await preview.update(datas);
             res.json(preview);
         } catch (error) {
@@ -89,14 +91,16 @@ const previewController = {
     },
 
     deletePreview: async (req, res) => {
-        const { id } = req.params;
+        const id = req.params.id;
         try {
             const preview = await Preview.findByPk(id);
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
+            // preview.link
+            await unlink(preview.link);
             await preview.destroy();
-            res.status(200).json({message: 'Entreprise supprimée'});
+            res.status(200).json({message: 'Extrait supprimé'});
         } catch (error) {
             console.error("Erreur lors de la suppression de l'extrait : ", error);
             res.status(500).json({ error: "Erreur interne du serveur" });

@@ -50,7 +50,13 @@ try {
         title: "Extrait 3",
         isStar: true,
         date: new Date("2025-05-05")
-    })
+    }),
+    // await Preview.create({
+    //     title: "Extrait à supprimer",
+    //     isStar: true,
+    //     date: new Date("2025-06-06"),
+    //     link: "uploads/RAYE - WHERE IS MY HUSBAND! (Official Music Video).mp3-1761222883667-884693652"
+    // })
 
     // messages-contact
     await MessageContact.create({

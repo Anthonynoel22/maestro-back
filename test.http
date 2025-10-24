@@ -203,5 +203,5 @@ Content-Type: application/json
 }
 
 ### Suppression d'un extrait
-DELETE http://localhost:3000/api/admin/preview/3
+DELETE http://localhost:3000/api/admin/preview/4
 Content-Type: application/json
