@@ -49,7 +49,7 @@ const projectsController = {
             if (!project) {
                 return res.status(404).json({ message: "Aucun projet trouvé" });
             }
-            await projet.update(req.body);
+            await project.update(req.body);
             res.json(project);
         } catch (error) {
             console.error("Erreur lors de la modification du projet :", error);
