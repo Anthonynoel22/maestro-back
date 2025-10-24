@@ -55,6 +55,16 @@ const previewController = {
             console.error("Erreur lors de la recherche des extraits filtrés : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});
         }
+    },
+
+    addPreview: async (req, res) => {
+        // dans ma variable link, je stock la destination et le filename définis dans uploadMiddleware
+        const link = `${req.file.destination}${req.file.filename}`;
+        // req.body correspondent aux champs de la requête
+        req.body.link = link; // req.body.link correspond maintenant à ma variable link, créée au-dessus
+        const datas = req.body;
+        const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
+        res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
     }
 
 

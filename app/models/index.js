@@ -15,7 +15,7 @@ Preview.belongsToMany(Genre, {
     through: "preview_genre",
     foreignKey: "preview_id",
     otherKey: "genre_id",
-    as: "genres" // alias corrigé
+    as: "listGenres" // alias corrigé
 });
 
 // Un Genre peut avoir plusieurs Previews
@@ -55,7 +55,7 @@ User.belongsTo(Company, {
 // Une entreprise peut avoir plusieurs utilisateurs
 Company.hasMany(User, {
     foreignKey: "company_id",
-    as: "users"
+    as: "listUsers"
 });
 
 export { User, Projet, Company, Preview, Genre, MessageContact, Description };

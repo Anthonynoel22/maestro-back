@@ -7,7 +7,7 @@ const projectRouter =  express.Router();
 //Admin
 
 // GET /api/admin/project
-projectRouter.get('/admin/projet', projectsController.getAllProjects)
+projectRouter.get('/admin/project', projectsController.getAllProjects)
 
 
 // GET /api/admin/project/filter?

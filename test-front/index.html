@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form" method="post" enctype="multipart/form-data">
+        <label for="preview">Importe l'extrait</label>
+        <input type="file" name="preview" id="preview">
+        <label for="title">Titre</label>
+        <input type="text" name="title" id="title">
+        <button type="submit">Envoyer</button>
+    </form>
+    <p id="p"></p>
+</body>
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form); // je veux envoyer un formData sinon il ne prend pas le fichier
+        const res = await fetch('http://localhost:3000/api/admin/preview', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await res.json();
+    })
+    const p = document.getElementById('p');
+    p.textContent = JSON.stringify(data, null, 2);
+</script>
+</html>

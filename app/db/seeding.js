@@ -6,6 +6,7 @@ import {
     Preview,
     Genre,
     MessageContact,
+    Description
 } from "../models/index.js";
 import bcrypt from "bcryptjs";
 
