@@ -5,7 +5,10 @@ const previewController = {
 
     findAll: async (req, res) => {
         try {
-            const previews = await Preview.findAll();
+            const previews = await Preview.findAll({include: [{
+                model: Genre,
+                as: "listGenres"
+            }]});
             if (previews.length > 0) {
                 res.json(previews);
             } else {
