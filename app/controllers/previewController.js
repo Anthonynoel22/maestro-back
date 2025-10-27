@@ -1,4 +1,5 @@
 import { User, Projet, Company, Preview, Genre } from "../models/index.js";
+import { unlink } from 'node:fs/promises';
 
 const previewController = {
 
@@ -63,8 +64,46 @@ const previewController = {
         // req.body correspondent aux champs de la requête
         req.body.link = link; // req.body.link correspond maintenant à ma variable link, créée au-dessus
         const datas = req.body;
-        const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
-        res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
+        try {
+            const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
+            res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
+        } catch (error) {
+            console.error("Erreur lors de l'ajout de l'extrait : ", error);
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
+
+    updatePreview: async (req, res) => {
+        const { id } = req.params;
+        const datas = req.body;
+        try {
+            const preview = await Preview.findByPk(id);
+            if (!preview) {
+                return res.status(404).json({message: 'Extrait non trouvé'});
+            }
+            await preview.update(datas);
+            res.json(preview);
+        } catch (error) {
+            console.error("Erreur lors de la modification de l'extrait :", error);
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
+
+    deletePreview: async (req, res) => {
+        const id = req.params.id;
+        try {
+            const preview = await Preview.findByPk(id);
+            if (!preview) {
+                return res.status(404).json({message: 'Extrait non trouvé'});
+            }
+            // preview.link
+            await unlink(preview.link);
+            await preview.destroy();
+            res.status(200).json({message: 'Extrait supprimé'});
+        } catch (error) {
+            console.error("Erreur lors de la suppression de l'extrait : ", error);
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
     }
 
 

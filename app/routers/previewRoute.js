@@ -19,10 +19,10 @@ previewRoute.post('/admin/preview', upload.single('preview'), previewController.
 // upload.single('preview') me permet d'aller chercher le fichier déposé dans l'input type='file' dont le name vaut 'preview'
 
 // PATCH /api/admin/preview + /:id à ajouter ?
-
+previewRoute.patch('/admin/preview/:id', previewController.updatePreview);
 
 // DELETE /api/admin/preview + /:id à ajouter ?
-
+previewRoute.delete('/admin/preview/:id', previewController.deletePreview);
 
 
 export default previewRoute;

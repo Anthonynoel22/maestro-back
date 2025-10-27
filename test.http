@@ -192,3 +192,16 @@ Content-Type: application/json
 ### Récupérer tous les extraits triés par dates
 GET http://localhost:3000/api/preview/filter
 Content-Type: application/json
+
+
+### Modification d'un extrait
+PATCH http://localhost:3000/api/admin/preview/1
+Content-Type: application/json
+
+{
+    "title": "Extrait modifié"
+}
+
+### Suppression d'un extrait
+DELETE http://localhost:3000/api/admin/preview/4
+Content-Type: application/json
