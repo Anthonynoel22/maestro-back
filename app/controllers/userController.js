@@ -12,8 +12,7 @@ const userController = {
         console.log(req.body);
         try {
             const userDatas = req.body;
-            const { email, password } =
-                userDatas;
+            const { email, password } = userDatas;
 
             const passwordHashed = await bcrypt.hash(password, 10);
             console.log(userDatas);
@@ -152,7 +151,7 @@ const userController = {
             }
             return res.json({
                 message: "Profil récupéré",
-                user: { id: user.id, name: user.name, email: user.email },
+                user: user,
             });
         } catch (error) {
             console.error(
