@@ -1,7 +1,4 @@
 node_modules
 .env
-<<<<<<< HEAD
 uploads
-=======
-uploads
->>>>>>> 167d7dd8784ea8654a63c0c1830499b1cb2e6089
+imageUploads
