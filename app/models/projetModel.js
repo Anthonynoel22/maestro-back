@@ -10,9 +10,9 @@ class Projet extends Model {}
 export const STATUS = [ 
   "à commencer",
   "en cours",
-  "en attente de retour",
+  "attente retour",
   "terminé",
-  "en attente d'acceptation"
+  "attente acceptation"
 ];
 
 Projet.init(
@@ -32,7 +32,7 @@ Projet.init(
   },
     status: {
       type: DataTypes.ENUM(...STATUS),
-      defaultValue: "en attente d'acceptation",
+      defaultValue: "attente acceptation",
     },
     deadline: {
       type: DataTypes.DATEONLY,

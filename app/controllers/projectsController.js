@@ -97,7 +97,7 @@ const projectsController = {
             if (projects.length > 0) {
                 res.json({projects,Liststatus});
             } else {
-                res.status(404).json({ message: "Aucun projet trouvé" });
+                res.status(200).json({projects: [], message: "Aucun projet trouvé"});
             }
         } catch (error) {
             console.error("Erreur lors de la recherche des projets :", error);
@@ -113,12 +113,12 @@ const projectsController = {
         }
         try {
             // penser a filtrer aussi avec le user
-            const projects = await Projet.findAll({ where: { status } });
+            const projects = await Projet.findAll({ where: { user_id : req.user.id, status: status} });
 
             if (projects.length > 0) {
-                res.json({projects});
+                res.json({projects, message: "Projet trouvé"});
             } else {
-                res.status(404).json({message: "Aucun projet trouvé avec ce statut",});
+                res.status(200).json({projects: [], message: "Aucun projet trouvé avec ce statut"});
             }
         } catch (error) {
             console.error("Erreur lors du filtrage par statut :", error);

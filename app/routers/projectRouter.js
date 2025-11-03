@@ -34,7 +34,7 @@ projectRouter.get('/project',authenticate,projectsController.listProjects)
 
 
 // GET /api/project/filter?
-projectRouter.get('/project/filter', projectsController.sortByStatut)
+projectRouter.get('/project/filter', authenticate,projectsController.sortByStatut)
 
 
 
