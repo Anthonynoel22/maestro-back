@@ -90,6 +90,14 @@ const previewController = {
         const datas = req.body; // dans req.body.title -> title name du form
         try {
             const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
+            console.log('req.body.genres', req.body.genres);
+            
+            for (const genre of Array.from((req.body.genres).split(","))) {
+                const selectedGenre = await Genre.findByPk(genre);
+                // il em faut l'object en entier (genre find by pk)
+                // et je renvoie dans addListGenres le find by pk
+                await newUpload.addListGenres([selectedGenre]);
+            }
             res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
         } catch (error) {
             console.error("Erreur lors de l'ajout de l'extrait : ", error);
