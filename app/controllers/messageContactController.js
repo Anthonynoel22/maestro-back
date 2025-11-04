@@ -59,6 +59,24 @@ const messageContact = {
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
     },
+
+    // Supprimer un message-contact
+    // DELETE /api/genre/:idMessageContact
+    deleteMessage: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const message = await MessageContact.findByPk(id);
+            if (!message) {
+                return res.status(404).json({ message: "Aucun message trouvé" });
+            }
+            await message.destroy();
+            res.status(204).send();
+        } catch (error) {
+            console.error("Erreur lors de la suppression du message :", error);
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
 };
+
 
 export default messageContact;

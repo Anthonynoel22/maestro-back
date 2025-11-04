@@ -91,12 +91,16 @@ Content-Type: application/json
 }
 
 ### modifier les messages
-PATCH  http://localhost:3000/api/message-contact/5
+PATCH  http://localhost:3000/api/message-contact/8
 Content-Type: application/json
 
 {
-    "status": "lu"
+    "status": "non lu"
 }
+
+### Supprimer les messages
+Delete  http://localhost:3000/api/message-contact/5
+Content-Type: application/json
 
 ### Récupérer les genres
 GET http://localhost:3000/api/genre

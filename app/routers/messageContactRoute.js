@@ -15,6 +15,10 @@ messageContactRoute.post('/message-contact', messageContactController.create);
 messageContactRoute.patch('/message-contact/:id', messageContactController.update);
 
 
+// DELETE /api/genre/:idMessageContact
+messageContactRoute.delete('/message-contact/:id', messageContactController.deleteMessage)
+
+
 
 
 export default messageContactRoute;
