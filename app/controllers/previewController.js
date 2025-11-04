@@ -87,9 +87,17 @@ const previewController = {
         const link = `${req.file.destination}${req.file.filename}`;
         // req.body correspondent aux champs de la requête
         req.body.link = link; // req.body.link correspond maintenant à ma variable link, créée au-dessus
-        const datas = req.body;
+        const datas = req.body; // dans req.body.title -> title name du form
         try {
             const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
+            console.log('req.body.genres', req.body.genres);
+            
+            for (const genre of Array.from((req.body.genres).split(","))) {
+                const selectedGenre = await Genre.findByPk(genre);
+                // il em faut l'object en entier (genre find by pk)
+                // et je renvoie dans addListGenres le find by pk
+                await newUpload.addListGenres([selectedGenre]);
+            }
             res.status(201).json(newUpload); // et ici on renvoie la réponse et son statut
         } catch (error) {
             console.error("Erreur lors de l'ajout de l'extrait : ", error);
