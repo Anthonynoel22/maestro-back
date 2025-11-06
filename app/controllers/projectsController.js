@@ -12,7 +12,7 @@ const projectsController = {
             if (projects.length > 0) {
                 res.json({projects, Liststatus});
             } else {
-                res.status(404).json({ message: "Aucun projet trouvé" });
+                res.status(404).json({projects: [], message: "Aucun projet trouvé" });
             }
         } catch (error) {
             console.error("Erreur lors de la recherche des projets :", error);
