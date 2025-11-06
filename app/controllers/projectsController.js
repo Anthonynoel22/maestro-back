@@ -1,14 +1,16 @@
 import {User, Projet, Company, Preview, Genre} from "../models/index.js";
 
 const projectsController = {
-    //Admin
+    //ADMIN
 
     // Voir toute la liste des projets
     getAllProjects : async (req, res) => {
         try {
             const projects = await Projet.findAll();
+            // on récupère toutes les valeurs de status du projet
+            const Liststatus = Projet.getAttributes().status.values;
             if (projects.length > 0) {
-                res.json(projects);
+                res.json({projects, Liststatus});
             } else {
                 res.status(404).json({ message: "Aucun projet trouvé" });
             }
@@ -17,6 +19,8 @@ const projectsController = {
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
     },
+
+
 
     // Trier les projets par statuts
     sortProjectsByStatus : async (req, res)  =>{
@@ -73,7 +77,7 @@ const projectsController = {
         }
     },
 
-    //Client
+    //CLIENT
 
     // Faire une demande de projet
     askProject: async (req, res) => {

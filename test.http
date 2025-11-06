@@ -42,7 +42,7 @@ Content-Type: application/json
 
 {
     "email": "emma.postgres@exemple.com",
-    "password": "gargouille2025"
+    "password": "gargouille2025",
 }
 
 ### Modifier les informations

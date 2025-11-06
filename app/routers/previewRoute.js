@@ -18,6 +18,10 @@ previewRoute.post('/admin/preview', upload.single('previewFile'), previewControl
 // upload.single() me permet d'accepter l'upload d'un fichier (un seul à la fois)
 // upload.single('previewFile') me permet d'aller chercher le fichier déposé dans l'input type='file' dont le name vaut 'previewFile'
 
+// ajout d'un findbypk
+// GET /api/preview/:id
+previewRoute.get('/preview/:id', previewController.findById);
+
 // PATCH /api/admin/preview + /:id à ajouter ?
 previewRoute.patch('/admin/preview/:id', previewController.updatePreview);
 

@@ -20,6 +20,31 @@ const previewController = {
         }
     },
 
+    findById: async (req, res) => {
+        try {
+            const preview = await Preview.findByPk(req.params.id, {
+                include: [{
+                    model: Genre,
+                    as: "listGenres"
+                }]
+            });
+            if (preview) {
+                res.json(preview);
+            } else {
+                return res.status(401).json({
+                    status: 401,
+                    message: "Aucun extrait trouvé",
+                });
+            }
+        } catch (error) {
+            console.error(
+                "Erreur lors de la recherche d'un extrait",
+                error
+            );
+            res.status(500).json({ error: "Erreur interne du serveur" });
+        }
+    },
+
     findStar: async (req, res) => {
         try {
             const previews = await Preview.findAll({
@@ -113,6 +138,19 @@ const previewController = {
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
+
+            // on réinitialise les genres associés
+            await preview.setListGenres([]);
+            // on sauvegarde d'abord pour éviter les conflits
+            await preview.save();
+
+            // on ajoute les nouveaux genres
+            for (const genre of Array.from((req.body.genres).split(","))) {
+                const selectedGenre = await Genre.findByPk(genre); // il faut l'object en entier (genre find by pk)
+                // et je renvoie dans addListGenres le find by pk
+                await preview.addListGenres([selectedGenre]);
+            }
+
             await preview.update(datas);
             res.json(preview);
         } catch (error) {

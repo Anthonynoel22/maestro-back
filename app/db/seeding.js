@@ -82,6 +82,7 @@ try {
     await User.create({
         email: "camille.script@exemple.com",
         password: passwordHashed2,
+        role: "admin",
     });
 
     const passwordHashed3 = await bcrypt.hash("gargouille2028", 10);
