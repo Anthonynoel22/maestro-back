@@ -30,10 +30,14 @@ const descriptionController = {
     // POST /api/admin/description
     create: async (req, res) => {
         try {
-            const link = `${req.file.destination}${req.file.filename}`;
-            // req.body correspondent aux champs de la requête
-            req.body.image_link = link;
             const datas = req.body;
+
+            if (req.file) {
+                // Construire le lien vers l'image uploadée
+                const link = `${req.file.destination}${req.file.filename}`;
+                datas.image_link = link;
+            }
+
             console.log(datas);
             const newDescription = await Description.create(datas);
             res.status(201).json(newDescription);

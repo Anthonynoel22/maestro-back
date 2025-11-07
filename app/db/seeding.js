@@ -105,12 +105,12 @@ try {
     await Description.create({
         title: "Title1",
         image_link: "Image1",
-        text: "Text1"
+        text:"Text3",
     });
 /*     await Description.create({
-        title: "Title2",
-        image_link: "Image2",
-        text: "Text2",
+        title: "présentation",
+        image_link: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6jVN7KLjsVPlWIUVvI3CC9Vn3aXsVFt0llA&s",
+        text:"lorem",
     }); */
 /*     await Description.create({
         title: "Title3",
