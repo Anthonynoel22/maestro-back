@@ -203,7 +203,14 @@ const userController = {
     // Voir la liste des utilisateurs
     findAll: async (req, res) => {
         try {
-            const users = await User.findAll();
+            const users = await User.findAll({
+                include: [
+                    {
+                        model: Company,
+                        as: "company",
+                    },
+                ],
+            });
             if (users.length > 0) {
                 res.json(users);
             } else {
