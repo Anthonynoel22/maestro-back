@@ -75,19 +75,47 @@ const previewController = {
             // if ...
             const { genre } = req.query;
             if (genre) {
-                console.log('in genre');
+                // console.log('in genre');
                 
-                const previews = await Preview.findAll({
+                // const previews = await Preview.findAll({
+                //     include: [{
+                //         model: Genre,
+                //         as: "listGenres",
+                //         where: {
+                //             label: genre,
+                //         },
+                //     }],
+                //     order: [['date', 'DESC']]
+                // });
+                // res.json(previews);
+                // récupération des ids des previews qui ont le genre demandé
+                const matched = await Preview.findAll({
                     include: [{
                         model: Genre,
                         as: "listGenres",
-                        where: {
-                            label: genre
-                        }
+                        where: { label: genre },
+                        attributes: [] // on n'a besoin que des previews donc tableau vide
+                    }],
+                    attributes: ['id'],
+                    order: [['date', 'DESC']]
+                });
+
+                const ids = matched.map(p => p.id);
+                if (ids.length === 0) {
+                    return res.json([]); // pas de résultat
+                }
+
+                // récupération des previews correspondantes en incluant tous leurs genres
+                const previews = await Preview.findAll({
+                    where: { id: ids },
+                    include: [{
+                        model: Genre,
+                        as: "listGenres"
                     }],
                     order: [['date', 'DESC']]
                 });
-                res.json(previews);
+
+                return res.json(previews);
             } else {
                 console.log("dans le if");
                 const previews = await Preview.findAll({
