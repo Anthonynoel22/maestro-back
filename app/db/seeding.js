@@ -499,22 +499,34 @@ try {
 
     // Project
     await Projet.create({
-        name: "Title 1",
-        resume: "Resume 1",
+        name: "Composition d'une bande originale",
+        resume: "Bonjour, j’aurais besoin de vos services pour composer une petite bande originale destinée à un court-métrage. L’ambiance doit être douce et un peu mystérieuse. Merci d’avance.",
         status: "en cours",
         deadline: new Date("2025-05-05"),
     });
     await Projet.create({
-        name: "Title 2",
-        resume: "Resume 2",
+        name: "Mixage de l'EP 'Nuit Chromatique",
+        resume: "Bonjour, je souhaiterais faire mixer mon EP de 5 titres. Je cherche un rendu propre, moderne et assez aérien. Pourriez-vous vous en occuper s’il vous plaît ?",
         status: "à commencer",
         deadline: new Date("2025-05-05"),
     });
     await Projet.create({
-        name: "Title 3",
-        resume: "Resume 3",
+        name: "Mastering du single 'Éclipse",
+        resume: "Bonjour, j’ai besoin d’un mastering professionnel pour mon prochain single. L’objectif est de le diffuser sur les plateformes et d’obtenir un son bien équilibré. Merci pour votre travail.",
         status: "terminé",
         deadline: new Date("2025-05-05"),
+    });
+    await Projet.create({
+        name: "Création d'un habillage sonore pour une chaîne YouTube",
+        resume: "Bonjour, je souhaiterais votre aide pour créer un habillage sonore complet pour ma chaîne YouTube. J’aurais besoin d’un jingle d’intro, d’une petite musique de fond et de quelques effets sonores. Merci beaucoup pour votre disponibilité.",
+        status: "attente acceptation",
+        deadline: new Date("2025-07-01"),
+    });
+    await Projet.create({
+        name: "Arrangement acoustique d’un morceau personnel",
+        resume: "Bonjour, j’aurais besoin de vos services pour réarranger l’un de mes morceaux en version acoustique. J’aimerais quelque chose de plus doux, centré sur guitare et voix. Merci pour votre aide.",
+        status: "attente retour",
+        deadline: new Date("2025-08-10"),
     });
 
     const users = await User.findAll();
