@@ -25,13 +25,9 @@ app.use(
     })
 );
 
-<<<<<<< HEAD
-app.use('/imageUploads', express.static('app/imageUploads'));
-=======
-app.use('/uploads', express.static('uploads'));
+app.use('/imagesUploads', express.static('app/imageUploads'));
 
-app.use('/imagesUploads', express.static('imageUploads'));
->>>>>>> 74be6adbae9878bfca8e77dc585159ab1c36f8a3
+app.use('/uploads', express.static('uploads'));
 
 app.use(router);
 
