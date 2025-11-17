@@ -6,7 +6,7 @@ const imageStorage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.originalname + '-' + uniqueSuffix)
+        cb(null, (uniqueSuffix + '-' + file.originalname).replace(/[^a-zA-Z0-9.]/g, ''))
     }
 });
 
