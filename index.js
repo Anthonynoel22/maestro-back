@@ -25,9 +25,9 @@ app.use(
     })
 );
 
-app.use('/uploads', express.static('uploads'));
+app.use('/imagesUploads', express.static('app/imageUploads'));
 
-app.use('/imagesUploads', express.static('imageUploads'));
+app.use('/uploads', express.static('uploads'));
 
 app.use(router);
 

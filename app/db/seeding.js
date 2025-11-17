@@ -472,20 +472,23 @@ try {
 
     // Description-portfolio
     await Description.create({
-        title: "Title1",
-        image_link: "Image1",
-        text: "Text1",
-    });
-    await Description.create({
-        title: "Title2",
-        image_link: "Image2",
-        text: "Text1",
-    });
-    await Description.create({
+        title: "Présentation du compositeur",
+        image_link: "/app/imageUploads/extrait_partition_piano.jpg-1762951957132-718357379",
+        number : 1,
+        text:"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
+    });  
+        await Description.create({
+        title: "Mes prestation",
+        image_link: "app/imageUploads/partition-de-musique-1.jpg-1763129659379-403260838",
+        number : 2,
+        text:"Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
+    });  
+/*      await Description.create({
         title: "Title3",
-        image_link: "Image3",
+        image_link: "/app/imagesUploads/",
+        number : 1,
         text: "Text3",
-    });
+    });   */
 
     await Genre.create({
         label: "classique",

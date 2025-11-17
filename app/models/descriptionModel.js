@@ -26,6 +26,10 @@ Description.init(
             allowNull: false,
             validate: { notEmpty: true },
         },
+        number: {
+            type: DataTypes.INTEGER,
+            allowNull: true,          
+        },
     },
     {
         sequelize,

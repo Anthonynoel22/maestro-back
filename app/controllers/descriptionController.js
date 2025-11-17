@@ -30,10 +30,14 @@ const descriptionController = {
     // POST /api/admin/description
     create: async (req, res) => {
         try {
-            const link = `${req.file.destination}${req.file.filename}`;
-            // req.body correspondent aux champs de la requête
-            req.body.image_link = link;
             const datas = req.body;
+
+            if (req.file) {
+                // Construire le lien vers l'image uploadée
+                const link = `${req.file.destination}${req.file.filename}`;
+                datas.image_link = link;
+            }
+
             console.log(datas);
             const newDescription = await Description.create(datas);
             res.status(201).json(newDescription);
@@ -58,6 +62,12 @@ const descriptionController = {
                     .status(404)
                     .json({ message: "Description non trouvée" });
             }
+            // Si une nouvelle image est uploadée, ajoute le chemin/nom du fichier 
+            if (req.file) {
+                const link = `${req.file.destination}${req.file.filename}`;
+                datas.image_link = link;
+                
+            }
             await description.update(datas);
             res.json(description);
         } catch (error) {
@@ -70,7 +80,7 @@ const descriptionController = {
     },
 
     // DELETE /api/admin/description/:id
-    delete: async (req, res) => {
+    deleteDescription: async (req, res) => {
         try {
             const { id } = req.params;
 

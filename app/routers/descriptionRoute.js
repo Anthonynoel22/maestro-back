@@ -11,9 +11,9 @@ descriptionRoute.get("/description", descriptionController.findAll);
 descriptionRoute.post('/admin/description', imageUpload.single('image'), descriptionController.create)
 
 // PATCH /api/admin/description/:id
-descriptionRoute.patch('/admin/description/:id', descriptionController.update)
+descriptionRoute.patch('/admin/description/:id', imageUpload.single('image'), descriptionController.update)
 
 // DELETE /api/admin/description/:id
-descriptionRoute.delete('/admin/description/:id', descriptionController.delete)
+descriptionRoute.delete('/admin/description/:id', descriptionController.deleteDescription)
 
 export default descriptionRoute;
