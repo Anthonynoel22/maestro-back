@@ -1,4 +1,6 @@
 node_modules
 .env
-uploads
-imageUploads
+uploads/*
+!uploads/.gitkeep
+imageUploads/*
+!imageUploads/.gitkeep
