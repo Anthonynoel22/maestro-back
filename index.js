@@ -9,10 +9,16 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 
-dotenv.config();
+// ==========================================================
+// ⚙️ Configuration de dotenv
+// ==========================================================
+dotenv.config();  // Permet d'accéder aux variables définies dans .env via process.env
 
-const app = express();
-const port = process.env.PORT || 3000;
+// ==========================================================
+// 🚀 Initialisation d'Express
+// ==========================================================
+const app = express();                // Crée une application Express
+const port = process.env.PORT || 3000; // Définit le port (priorité à la variable .env, sinon 3000)
 
 // Permet de décoder le corps au format JSON de la requête HTTP
 app.use(express.json());
