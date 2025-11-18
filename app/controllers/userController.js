@@ -137,8 +137,18 @@ const userController = {
 
     // Se déconnecter
     logout: async (req, res) => {
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
+        res.clearCookie("access_token", 
+            {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+            });
+        res.clearCookie("refresh_token",
+            {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+            });
         res.json({ message: "Déconnexion effectuée" });
     },
 
