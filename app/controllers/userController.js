@@ -76,16 +76,16 @@ const userController = {
             // Envoi du cookie access_token
             res.cookie("access_token", accessToken, {
                 httpOnly: true, //  à true, il devient impossible d’y accéder depuis JS (front)
-                secure: false, //  Mettre true en production avec HTTPS
-                sameSite: "Strict", // Protège contre certaines attaques CSRF
+                secure: true, //  Mettre true en production avec HTTPS
+                sameSite: "none", // Protège contre certaines attaques CSRF
                 maxAge: 60 * 60 * 1000, // 1 heure en millisecondes
             });
 
             // Envoi du cookie refresh_token
             res.cookie("refresh_token", refreshToken, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "Strict",
+                secure: true,
+                sameSite: "none",
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
             });
 
@@ -123,11 +123,11 @@ const userController = {
             // Réécriture du cookie access_token
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "Strict",
+                secure: true,
+                sameSite: "none",
                 maxAge: 60 * 60 * 1000,
             });
-            res.json({ message: "Nouveau token généré 🔄" });
+            res.json({ message: "Nouveau token généré" });
         } catch {
             res.status(403).json({
                 message: "Refresh token invalide ou expiré",
@@ -137,8 +137,20 @@ const userController = {
 
     // Se déconnecter
     logout: async (req, res) => {
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
+        res.clearCookie("access_token",
+            {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            }
+        );
+        res.clearCookie("refresh_token",
+            {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            }
+        );
         res.json({ message: "Déconnexion effectuée" });
     },
 
