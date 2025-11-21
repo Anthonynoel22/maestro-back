@@ -195,7 +195,9 @@ const previewController = {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
             // preview.link
-            await unlink(preview.link);
+            if (preview.link != null) {
+                await unlink(preview.link);
+            }
             await preview.destroy();
             res.status(200).json({message: 'Extrait supprimé'});
         } catch (error) {
