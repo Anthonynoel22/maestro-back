@@ -18,8 +18,15 @@ Content-Type: application/json
 ### creation d'une entreprise
 GET http://localhost:3000/api/company
 Content-Type: application/json
+# {
+#     "name": "Entreprise créée",
+#     "siret": "51234567891234",
+#     "localisation": "Pau"
+# }
+
+// Test sanitize
 {
-    "name": "Entreprise créée",
+    "name": "totoDev<script>alert('XSS')</script>",
     "siret": "51234567891234",
     "localisation": "Pau"
 }
