@@ -563,9 +563,9 @@ try {
         await companies[ci].addListUsers([users[ui]]); // Company.hasMany(User, { as: "listUsers" })
     }
 
-    await previews[0].addListGenres([genres[0], genres[2]]);
-    await previews[1].addListGenres([genres[1], genres[2]]);
-    await previews[2].addListGenres([genres[0]]);
+    // await previews[0].addListGenres([genres[0], genres[2]]);
+    // await previews[1].addListGenres([genres[1], genres[2]]);
+    // await previews[2].addListGenres([genres[0]]);
 } catch (error) {
     console.error(error);
 }
