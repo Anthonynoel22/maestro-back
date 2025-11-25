@@ -40,7 +40,7 @@ app.use('/uploads', express.static('uploads'));
 // SECURITE : middleware sert à limiter le nombre de requêtes qu’un client peut faire
 app.use(rateLimit({
     windowMs: 15 * 60 * 1000, //  15 minutes
-    max: 200// nb maximum de requêtes
+    max: 500// nb maximum de requêtes
     }));
 
 app.use(router);

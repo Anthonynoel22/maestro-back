@@ -42,32 +42,6 @@ const companyController = {
         }
     },
 
-    // POST /api/company
-    // create: async (req, res) => {
-    //     try {
-    //         const user = await User.findByPk(req.user.id);
-    //         const datas = req.body;
-
-    //         // ---------------------------------------------------
-    //         const cleanName = sanitizeHtml(req.body.name);
-    //         // TEST SANITIZE:
-    //         console.log("Avant : ", req.body.name);
-    //         console.log("Apres : ", cleanName);
-    //         // ---------------------------------------------------
-
-    //         console.log(datas);
-    //         const newCompany = await Company.create(datas);
-    //         await newCompany.addListUsers([user]);
-    //         console.log(req.body);
-    //         res.status(201).json(newCompany);
-    //     } catch (error) {
-    //         console.error(
-    //             "Erreur lors de la création de l'entreprise : ",
-    //             error
-    //         );
-    //         res.status(500).json({ error: "Erreur interne du serveur" });
-    //     }
-    // },
 
     // POST /api/company
     create: async (req, res) => {
