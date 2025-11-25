@@ -48,9 +48,16 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "email": "emma.postgres@exemple.com",
-    "password": "gargouille2025",
+    "email": "lena3.webhook@exemple.com",
+    "password": "gargouille3001"
 }
+
+// TEST SECURITY SANITYSE-HTML
+# {
+#         "email": "lena5.webhook@exemple.com<script>alert('XSS')</script>",
+#         "password": "gargouille3001"
+# }
+
 
 
 ### Modifier les informations
