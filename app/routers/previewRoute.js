@@ -1,6 +1,8 @@
 import express from "express";
 import previewController from "../controllers/previewController.js";
 import { upload } from "../middlewares/uploadMiddleware.js";
+import authenticate from "../middlewares/authMiddleware.js";
+import adminAuthenticate from "../middlewares/adminMiddleware.js"
 
 const previewRoute = express.Router();
 
@@ -14,7 +16,7 @@ previewRoute.get("/preview/filter", previewController.findByFilter);
 previewRoute.get("/preview/star", previewController.findStar);
 
 // POST /api/admin/preview
-previewRoute.post('/admin/preview', upload.single('previewFile'), previewController.addPreview);
+previewRoute.post('/admin/preview',authenticate, adminAuthenticate, upload.single('previewFile'), previewController.addPreview);
 // upload.single() me permet d'accepter l'upload d'un fichier (un seul à la fois)
 // upload.single('previewFile') me permet d'aller chercher le fichier déposé dans l'input type='file' dont le name vaut 'previewFile'
 
@@ -23,10 +25,10 @@ previewRoute.post('/admin/preview', upload.single('previewFile'), previewControl
 previewRoute.get('/preview/:id', previewController.findById);
 
 // PATCH /api/admin/preview + /:id à ajouter ?
-previewRoute.patch('/admin/preview/:id', previewController.updatePreview);
+previewRoute.patch('/admin/preview/:id', authenticate, adminAuthenticate, previewController.updatePreview);
 
 // DELETE /api/admin/preview + /:id à ajouter ?
-previewRoute.delete('/admin/preview/:id', previewController.deletePreview);
+previewRoute.delete('/admin/preview/:id', authenticate, adminAuthenticate, previewController.deletePreview);
 
 
 export default previewRoute;

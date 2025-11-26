@@ -1,6 +1,7 @@
 import express from 'express';
 import projectsController from '../controllers/projectsController.js';
 import authenticate from "../middlewares/authMiddleware.js";
+import adminAuthenticate from "../middlewares/adminMiddleware.js"
 
 
 const projectRouter =  express.Router();
@@ -9,20 +10,20 @@ const projectRouter =  express.Router();
 
 // Voir toute la liste des projets
 // GET /api/admin/project
-projectRouter.get('/admin/project', authenticate,projectsController.getAllProjects)
+projectRouter.get('/admin/project', authenticate, adminAuthenticate,projectsController.getAllProjects)
 
 
 // Trier les projets par statuts
 // GET /api/admin/project/filter?
-projectRouter.get('/admin/project/filter', authenticate,projectsController.sortProjectsByStatus)
+projectRouter.get('/admin/project/filter', authenticate, adminAuthenticate,projectsController.sortProjectsByStatus)
 
 //Modifier le statut
 // PATCH /api/admin/project/:idProjet
-projectRouter.patch('/admin/project/:id', authenticate,projectsController.updateStatus)
+projectRouter.patch('/admin/project/:id', authenticate, adminAuthenticate,projectsController.updateStatus)
 
 // Supprimer le projet
 // DELETE /api/admin/project/:idProjet
-projectRouter.delete('/admin/project/:id', authenticate,projectsController.deleteProject)
+projectRouter.delete('/admin/project/:id', authenticate, adminAuthenticate,projectsController.deleteProject)
 
 
 //CLIENT : 

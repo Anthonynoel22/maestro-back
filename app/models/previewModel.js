@@ -22,7 +22,7 @@ Preview.init(
         },
         link: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         isStar: {
             type: DataTypes.BOOLEAN,

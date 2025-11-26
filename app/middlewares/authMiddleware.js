@@ -17,8 +17,8 @@ function authenticate(req, res, next) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // On ajoute les infos du token à req.user pour les routes suivantes
         req.user = decoded;
-        // Tout est OK, on passe à la route suivante
         next();
+
     } catch {
         // Token invalide ou expiré
         return res.status(403).json({ message: "Token invalide ou expiré" });

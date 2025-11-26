@@ -18,8 +18,15 @@ Content-Type: application/json
 ### creation d'une entreprise
 GET http://localhost:3000/api/company
 Content-Type: application/json
+# {
+#     "name": "Entreprise créée",
+#     "siret": "51234567891234",
+#     "localisation": "Pau"
+# }
+
+// Test sanitize
 {
-    "name": "Entreprise créée",
+    "name": "totoDev<script>alert('XSS')</script>",
     "siret": "51234567891234",
     "localisation": "Pau"
 }
@@ -41,9 +48,17 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "email": "emma.postgres@exemple.com",
-    "password": "gargouille2025",
+    "email": "lena3.webhook@exemple.com",
+    "password": "gargouille3001"
 }
+
+// TEST SECURITY SANITYSE-HTML
+# {
+#         "email": "lena5.webhook@exemple.com<script>alert('XSS')</script>",
+#         "password": "gargouille3001"
+# }
+
+
 
 ### Modifier les informations
 PATCH http://localhost:3000/api/user
@@ -57,7 +72,7 @@ Content-Type: application/json
     "password": "gargouille2025"
 }
 
-### authentification
+### authentification admin
 POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
@@ -65,6 +80,16 @@ Content-Type: application/json
     "email": "robin.syntaxe@exemple.com",
     "password": "gargouille2026"
 }
+
+### authentification user
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "lena.webhook@exemple.com",
+    "password": "gargouille3001"
+}
+
 
 ### Voir ses informations personnelles
 GET http://localhost:3000/api/user/profile
