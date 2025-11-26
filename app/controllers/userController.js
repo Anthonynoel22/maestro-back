@@ -2,6 +2,7 @@ import { User, Projet, Company, Preview, Genre } from "../models/index.js";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import sanitizeHtml from "sanitize-html";
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -11,15 +12,21 @@ const userController = {
     create: async (req, res) => {
         console.log(req.body);
         try {
-            const userDatas = req.body;
-            const { email, password } = userDatas;
+            // récupération du mail & password par le front
+            const { email, password } = req.body;
 
+            // nettoyage de l'email avec SANITIZE
+            const cleanEmail = sanitizeHtml(req.body.email);
+            // TEST SECURITY console
+            // console.log("Email avant :", req.body.email);
+            // console.log("Email après :", cleanEmail);
+
+            // HASH du mot de passe
             const passwordHashed = await bcrypt.hash(password, 10);
-            console.log(userDatas);
-            console.log(passwordHashed);
 
             await User.create({
-                email,
+                // données sécurisées
+                email: cleanEmail,
                 password: passwordHashed,
             });
             res.status(201).json({
@@ -127,7 +134,7 @@ const userController = {
                 sameSite: "none",
                 maxAge: 60 * 60 * 1000,
             });
-            res.json({ message: "Nouveau token généré 🔄" });
+            res.json({ message: "Nouveau token généré" });
         } catch {
             res.status(403).json({
                 message: "Refresh token invalide ou expiré",
@@ -137,18 +144,16 @@ const userController = {
 
     // Se déconnecter
     logout: async (req, res) => {
-        res.clearCookie("access_token", 
-            {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-            });
-        res.clearCookie("refresh_token",
-            {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-            });
+        res.clearCookie("access_token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
+        res.clearCookie("refresh_token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
         res.json({ message: "Déconnexion effectuée" });
     },
 
@@ -158,7 +163,7 @@ const userController = {
             const user = await User.findByPk(req.user.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
             return res.json({
@@ -182,7 +187,7 @@ const userController = {
             const user = await User.findByPk(req.user.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
 
@@ -209,7 +214,7 @@ const userController = {
             const user = await User.findByPk(req.params.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
 
@@ -251,7 +256,7 @@ const userController = {
             if (users.length > 0) {
                 res.json(users);
             } else {
-                res.status(404).json({ message: "Aucun utilisateur trouvé" });
+                res.status(400).json({ message: "Aucun utilisateur trouvé" });
             }
         } catch (error) {
             console.error(
@@ -268,7 +273,7 @@ const userController = {
             const user = await User.findByPk(req.params.id);
             if (!user) {
                 return res
-                    .status(404)
+                    .status(400)
                     .json({ message: "Utilisateur introuvable" });
             }
             console.log(user);

@@ -1,4 +1,5 @@
 import { User, Projet, Company, Preview, Genre } from "../models/index.js";
+import sanitizeHtml from "sanitize-html";
 
 const companyController = {
     // GET /api/admin/company
@@ -41,17 +42,35 @@ const companyController = {
         }
     },
 
+
     // POST /api/company
     create: async (req, res) => {
-        // console.log(req);
-        console.log(req.body);
-
         try {
             const user = await User.findByPk(req.user.id);
-            const datas = req.body;
-            console.log(datas);
-            const newCompany = await Company.create(datas);
+            const cleanDatas = {
+                name: sanitizeHtml(req.body.name),
+                siret: sanitizeHtml(req.body.siret),
+                localisation: sanitizeHtml(req.body.localisation),
+            };
+
+            // TEST SANITIZE:
+            console.log(
+                "Avant : ",
+                req.body.name,
+                req.body.siret,
+                req.body.localisation
+            );
+            console.log(
+                "Apres : ",
+                cleanDatas.name,
+                cleanDatas.siret,
+                cleanDatas.localisation
+            );
+
+            // console.log(datas);
+            const newCompany = await Company.create(cleanDatas);
             await newCompany.addListUsers([user]);
+
             console.log(req.body);
             res.status(201).json(newCompany);
         } catch (error) {
