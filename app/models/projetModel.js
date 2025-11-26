@@ -52,20 +52,5 @@ Projet.init(
   }
 );
 
-// ASSOCIATIONS :
-
-// Un projet appartient à un utilisateur
-Projet.belongsTo(User, { foreignKey: "user_id", as: "user" });
-// Un projet appartient à une entreprise
-Projet.belongsTo(Company, { foreignKey: "company_id", as: "company" });
-// Un projet peut avoir plusieurs genres & un genre peut appartenir à plusieurs projets
-Projet.belongsToMany(Genre, {
-  through: "projet_genre",
-  foreignKey: "projet_id",
-  otherKey: "genre_id",
-  as: "genres",
-});
-// Un projet peut avoir plusieurs extraits
-Projet.hasMany(Preview, { foreignKey: "projet_id", as: "previews" });
 
 export default Projet;
