@@ -64,27 +64,9 @@ const previewController = {
     },
 
     findByFilter: async (req, res) => {
-        console.log('in findByFilter');
-        console.log(req.query.genre);
-        console.log(req.query.orderByDate);
-        
         try {
-            // if ...
             const { genre } = req.query;
             if (genre) {
-                // console.log('in genre');
-                
-                // const previews = await Preview.findAll({
-                //     include: [{
-                //         model: Genre,
-                //         as: "listGenres",
-                //         where: {
-                //             label: genre,
-                //         },
-                //     }],
-                //     order: [['date', 'DESC']]
-                // });
-                // res.json(previews);
                 // récupération des ids des previews qui ont le genre demandé
                 const matched = await Preview.findAll({
                     include: [{
@@ -114,18 +96,11 @@ const previewController = {
 
                 return res.json(previews);
             } else {
-                console.log("dans le if");
                 const previews = await Preview.findAll({
                     order: [['date', 'DESC']]
                 })
-                console.log("après la recherche");
-                
                 res.json(previews);
-                console.log("après res.json");
-                
             };
-
-            
         } catch (error) {
             console.error("Erreur lors de la recherche des extraits filtrés : ", error);
             res.status(500).json({error: "Erreur interne du serveur"});
@@ -140,11 +115,9 @@ const previewController = {
         const datas = req.body; // dans req.body.title -> title name du form
         try {
             const newUpload = await Preview.create(datas); // je crée newUpload grâce à datas
-            console.log('req.body.genres', req.body.genres);
-            
             for (const genre of Array.from((req.body.genres).split(","))) {
                 const selectedGenre = await Genre.findByPk(genre);
-                // il em faut l'object en entier (genre find by pk)
+                // il me faut l'object en entier (genre find by pk)
                 // et je renvoie dans addListGenres le find by pk
                 await newUpload.addListGenres([selectedGenre]);
             }
@@ -191,7 +164,6 @@ const previewController = {
             if (!preview) {
                 return res.status(404).json({message: 'Extrait non trouvé'});
             }
-            // preview.link
             if (preview.link != null) {
                 await unlink(preview.link);
             }
