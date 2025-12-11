@@ -4,3 +4,6 @@ uploads/*
 !uploads/.gitkeep
 imageUploads/*
 !imageUploads/.gitkeep
+!imageUploads/pexels-olly-3914678.jpg
+!imageUploads/Classic_music.jpg
+!uploads/good for the ghost - Alge.mp3
