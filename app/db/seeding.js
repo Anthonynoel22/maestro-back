@@ -104,11 +104,12 @@ try {
     });
 
     // Tests seeding pour les previews
-    // await Preview.create({
-    //     title: "Extrait 1",
-    //     isStar: false,
-    //     date: new Date("2025-01-01"),
-    // }),
+        await Preview.create({
+            title: "Extrait 1",
+            isStar: false,
+            date: new Date("2025-01-01"),
+            link:"uploads/good for the ghost - Alge.mp3",
+        }),
     //     await Preview.create({
     //         title: "Extrait 2",
     //         isStar: false,
@@ -474,13 +475,13 @@ try {
     // Description-portfolio
     await Description.create({
         title: "Présentation du compositeur",
-        image_link: "imageUploads/1764669336702874985279pexelsolly3914678.jpg",
+        image_link: "imageUploads/pexels-olly-3914678.jpg",
         number : 1,
         text:"Je suis Clément Vanier, compositeur passionné, inspiré aussi bien par la musique orchestrale que par l’électro et les sonorités du monde. J’aime créer des œuvres sur-mesure pour le cinéma, le jeu vidéo, la publicité ou tout autre projet créatif. Pour moi, chaque composition est une histoire à raconter, une émotion à faire naître. Sur Maestro, je présente mon portfolio, véritable reflet de mon parcours et de mes explorations musicales. Vous pouvez y écouter mes extraits, découvrir mon univers et ressentir l’identité de mon travail. Grâce à un espace d’échange dédié, je communique facilement avec mes clients et reste disponible à chaque étape. Je propose des prestations adaptées, de la création originale jusqu’au mixage final. Maestro est pour moi un atelier numérique complet, où j’organise, partage et suis l’avancement de chaque projet. Mon ambition : rendre la musique accessible, vivante et profondément personnelle. Bienvenue dans mon univers sonore.",
     });  
         await Description.create({
         title: "Mes prestations",
-        image_link: "imageUploads/1764669351284868293231Classicmusic.jpg",
+        image_link: "imageUploads/Classic_music.jpg",
         number : 2,
         text:"Je propose un accompagnement musical personnalisé, que vous soyez un professionnel ou un particulier. Pour les projets audiovisuels – films, jeux vidéo, publicités ou podcasts – je compose des musiques originales et adaptées à chaque univers. J’imagine également des identités sonores pour les marques, entreprises et créateurs de contenu. Pour les particuliers, je réalise des compositions uniques pour des moments forts : mariage, anniversaire, naissance ou hommage. Vous pouvez aussi faire appel à moi pour créer une chanson personnalisée, pensée spécialement pour une personne ou un événement. J’assure la création d’ambiances, de thèmes musicaux et d’arrangements sur mesure. Je peux retravailler ou réorchestrer une œuvre existante afin de lui donner une nouvelle vie. Le mixage et la finition audio font partie de mes prestations pour garantir un rendu professionnel. Chaque projet est construit en dialogue avec vous, pour coller à votre émotion, votre message ou votre identité. Mon ambition : transformer vos idées en musique et faire de chaque son un souvenir marquant",
     });  
