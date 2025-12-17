@@ -132,7 +132,7 @@ try {
         }), 
         
         await Preview.create({
-            title: "good for the ghost",
+            title: "Tubby",
             isStar: false,
             date: new Date("2025-06-15"),
             link:"uploads/Tubby - Steve Adams.mp3",
