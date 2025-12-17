@@ -1,13 +1,5 @@
 import sequelize from "./database.js";
-import {
-    User,
-    Projet,
-    Company,
-    Preview,
-    Genre,
-    MessageContact,
-    Description,
-} from "../models/index.js";
+import {User, Projet, Company, Preview, Genre, MessageContact, Description,} from "../models/index.js";
 import bcrypt from "bcryptjs";
 
 try {
@@ -103,23 +95,70 @@ try {
         localisation: "Nancy",
     });
 
-    // Tests seeding pour les previews
+    
         await Preview.create({
-            title: "Extrait 1",
+            title: "good for the ghost",
             isStar: false,
             date: new Date("2025-01-01"),
             link:"uploads/good for the ghost - Alge.mp3",
         }),
-    //     await Preview.create({
-    //         title: "Extrait 2",
-    //         isStar: false,
-    //         date: new Date("2025-03-03"),
-    //     }),
-    //     await Preview.create({
-    //         title: "Extrait 3",
-    //         isStar: true,
-    //         date: new Date("2025-05-05"),
-    //     }),
+
+        await Preview.create({
+            title: "Calling me back",
+            isStar: false,
+            date: new Date("2025-02-17"),
+            link:"uploads/Calling me back - Patrick Patrikios.mp3",
+        }),
+
+        await Preview.create({
+            title: "Impertinence",
+            isStar: false,
+            date: new Date("2025-03-22"),
+            link:"uploads/Impertinence - Joel Cummins.mp3",
+        }),
+        
+        await Preview.create({
+            title: "High Life",
+            isStar: false,
+            date: new Date("2025-04-08"),
+            link:"uploads/High Life - The Mini Vandals featuring Mamadou Koita and Lasso.mp3",
+        }), 
+        
+        await Preview.create({
+            title: "Nocturne",
+            isStar: false,
+            date: new Date("2025-05-30"),
+            link:"uploads/Nocturne - Asher Fulero.mp3",
+        }), 
+        
+        await Preview.create({
+            title: "good for the ghost",
+            isStar: false,
+            date: new Date("2025-06-15"),
+            link:"uploads/Tubby - Steve Adams.mp3",
+        }), 
+        
+        await Preview.create({
+            title: "Groove",
+            isStar: false,
+            date: new Date("2025-07-07"),
+            link:"uploads/Groove - Dyalla.mp3",
+        }), 
+        
+        await Preview.create({
+            title: " Symphony No.38",
+            isStar: false,
+            date: new Date("2025-08-14"),
+            link:"uploads/W. A. Mozart, Symphony No.38 in D major - A Far Cry.mp3",
+        }), 
+        
+        await Preview.create({
+            title: "Flight Is Aight",
+            isStar: false,
+            date: new Date("2025-09-23"),
+            link:"uploads/Flight Is Aight - Karneef.mp3",
+        }),
+
         // await Preview.create({
         //     title: "Extrait à supprimer",
         //     isStar: true,
