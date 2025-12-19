@@ -1,11 +1,4 @@
-import {
-    User,
-    Projet,
-    Company,
-    Preview,
-    Genre,
-    MessageContact,
-} from "../models/index.js";
+import {User, Projet, Company, Preview, Genre, MessageContact,} from "../models/index.js";
 
 const messageContact = {
     // GET /api/message-contact

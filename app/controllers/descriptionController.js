@@ -1,11 +1,4 @@
-import {
-    User,
-    Projet,
-    Company,
-    Preview,
-    Genre,
-    Description,
-} from "../models/index.js";
+import {User, Projet, Company, Preview, Genre, Description,} from "../models/index.js";
 
 const descriptionController = {
     findAll: async (req, res) => {
