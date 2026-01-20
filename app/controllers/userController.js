@@ -113,6 +113,24 @@ const userController = {
     },
 
     refresh: async (req, res) => {
+        // ✅ HEADERS CORS OBLIGATOIRES (1ère ligne !)
+        res.header(
+            "Access-Control-Allow-Origin",
+            "https://maestro-front-anthony.netlify.app",
+        );
+        res.header("Access-Control-Allow-Credentials", "true");
+        res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
+        res.header(
+            "Access-Control-Allow-Headers",
+            "Content-Type, Authorization",
+        );
+
+        // ✅ PREFLIGHT OPTIONS (400 → 200)
+        if (req.method === "OPTIONS") {
+            res.status(200).send("OK");
+            return;
+        }
+
         console.log("🍪 Cookies reçus :", req.cookies);
         const refreshToken = req.cookies.refresh_token;
         console.log("🎯 refresh_token =", refreshToken);
@@ -120,6 +138,7 @@ const userController = {
         if (!refreshToken) {
             return res.status(401).json({ message: "Pas de refresh token" });
         }
+
         try {
             const decoded = jwt.verify(
                 refreshToken,
@@ -130,18 +149,19 @@ const userController = {
                 process.env.JWT_SECRET,
                 { expiresIn: "1h" },
             );
+
+            // ✅ NOUVEAU access_token cookie
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
                 secure: true,
                 sameSite: "none",
-                maxAge: 60 * 60 * 1000,
+                maxAge: 60 * 60 * 1000, // 1h
             });
+
             return res.json({ message: "Nouveau token généré" });
         } catch (error) {
             console.error("❌ Erreur refresh :", error.message);
-            return res.status(403).json({
-                message: "Refresh token invalide ou expiré",
-            });
+            return res.status(403).json({ message: "Refresh token invalide" });
         }
     },
 
