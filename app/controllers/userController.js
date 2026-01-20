@@ -36,7 +36,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la création de l'utilisateur : ",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -70,14 +70,14 @@ const userController = {
             const accessToken = jwt.sign(
                 { id: user.id, role: user.role },
                 JWT_SECRET,
-                { expiresIn: "1h" }
+                { expiresIn: "1h" },
             );
 
             // Création du refresh token (7 jours)
             const refreshToken = jwt.sign(
                 { id: user.id, email: user.email },
                 process.env.REFRESH_SECRET,
-                { expiresIn: "7d" }
+                { expiresIn: "7d" },
             );
 
             // Envoi du cookie access_token
@@ -113,30 +113,33 @@ const userController = {
     },
 
     refresh: async (req, res) => {
+        console.log("🍪 Cookies reçus :", req.cookies);
         const refreshToken = req.cookies.refresh_token;
+        console.log("🎯 refresh_token =", refreshToken);
+
         if (!refreshToken) {
             return res.status(401).json({ message: "Pas de refresh token" });
         }
         try {
             const decoded = jwt.verify(
                 refreshToken,
-                process.env.REFRESH_SECRET
+                process.env.REFRESH_SECRET,
             );
             const newAccessToken = jwt.sign(
                 { id: decoded.id, email: decoded.email },
                 process.env.JWT_SECRET,
-                { expiresIn: "1h" }
+                { expiresIn: "1h" },
             );
-            // Réécriture du cookie access_token
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
                 secure: true,
                 sameSite: "none",
                 maxAge: 60 * 60 * 1000,
             });
-            res.json({ message: "Nouveau token généré" });
-        } catch {
-            res.status(403).json({
+            return res.json({ message: "Nouveau token généré" });
+        } catch (error) {
+            console.error("❌ Erreur refresh :", error.message);
+            return res.status(403).json({
                 message: "Refresh token invalide ou expiré",
             });
         }
@@ -173,7 +176,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la recupération des informations de l'utilisateur : ",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -202,7 +205,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la modification des informations de l'utilisateur : ",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -232,7 +235,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la modification status du compte : ",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -261,7 +264,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la recherche des utilisateurs",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -284,7 +287,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la recherche d'un utilisateur",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
@@ -324,7 +327,7 @@ const userController = {
         } catch (error) {
             console.error(
                 "Erreur lors de la recherche des utilisateurs",
-                error
+                error,
             );
             res.status(500).json({ error: "Erreur interne du serveur" });
         }
