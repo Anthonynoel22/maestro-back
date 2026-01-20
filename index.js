@@ -25,7 +25,9 @@ app.use(
     cors({
         origin: process.env.CLIENT_URL,
         credentials: true, // Autorise lʼenvoi automatique des cookies
-    })
+        methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    }),
 );
 
 app.use("/imagesUploads", express.static("imageUploads"));
@@ -37,7 +39,7 @@ app.use(
     rateLimit({
         windowMs: 15 * 60 * 1000, //  15 minutes
         max: 500, // nb maximum de requêtes
-    })
+    }),
 );
 
 app.use(router);
