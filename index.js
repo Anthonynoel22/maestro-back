@@ -7,7 +7,6 @@ import MessageContact from "./app/models/messageContactModel.js";
 import { User, Projet, Company, Preview, Genre } from "./app/models/index.js";
 import router from "./app/routers/router.js";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import jwt from "jsonwebtoken";
 
 // Configuration de dotenv
@@ -21,14 +20,20 @@ const port = process.env.PORT || 3000; // Définit le port (priorité à la vari
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(
-    cors({
-        origin: process.env.CLIENT_URL,
-        credentials: true, // Autorise lʼenvoi automatique des cookies
-        methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-    }),
-);
+
+app.use((req, res, next) => {
+    
+    res.header('Access-Control-Allow-Origin', 'https://maestro-front-anthony.netlify.app');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
+    if (req.method === 'OPTIONS') {
+        res.status(200).send('OK');
+        return;
+    }
+    next();
+});
 
 app.use("/imagesUploads", express.static("imageUploads"));
 

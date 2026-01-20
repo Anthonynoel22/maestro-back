@@ -113,24 +113,6 @@ const userController = {
     },
 
     refresh: async (req, res) => {
-        // ✅ HEADERS CORS OBLIGATOIRES (1ère ligne !)
-        res.header(
-            "Access-Control-Allow-Origin",
-            "https://maestro-front-anthony.netlify.app",
-        );
-        res.header("Access-Control-Allow-Credentials", "true");
-        res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
-        res.header(
-            "Access-Control-Allow-Headers",
-            "Content-Type, Authorization",
-        );
-
-        // ✅ PREFLIGHT OPTIONS (400 → 200)
-        if (req.method === "OPTIONS") {
-            res.status(200).send("OK");
-            return;
-        }
-
         console.log("🍪 Cookies reçus :", req.cookies);
         const refreshToken = req.cookies.refresh_token;
         console.log("🎯 refresh_token =", refreshToken);
