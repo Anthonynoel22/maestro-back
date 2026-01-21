@@ -84,7 +84,7 @@ const userController = {
             res.cookie("access_token", accessToken, {
                 httpOnly: true, //  à true, il devient impossible d’y accéder depuis JS (front)
                 secure: true, //  Mettre true en production avec HTTPS
-                sameSite: "none", // Protège contre certaines attaques CSRF
+                sameSite: "lax", // Protège contre certaines attaques CSRF
                 maxAge: 60 * 60 * 1000, // 1 heure en millisecondes
             });
 
@@ -92,7 +92,7 @@ const userController = {
             res.cookie("refresh_token", refreshToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "none",
+                sameSite: "lax",
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
             });
 
@@ -112,38 +112,34 @@ const userController = {
         }
     },
 
-    refresh: async (req, res) => {
-        console.log("🍪 Cookies reçus :", req.cookies);
-        const refreshToken = req.cookies.refresh_token;
-        console.log("🎯 refresh_token =", refreshToken);
 
+    refresh: async (req, res) => {
+        const refreshToken = req.cookies.refresh_token;
         if (!refreshToken) {
             return res.status(401).json({ message: "Pas de refresh token" });
         }
-
         try {
             const decoded = jwt.verify(
                 refreshToken,
-                process.env.REFRESH_SECRET,
+                process.env.REFRESH_SECRET
             );
             const newAccessToken = jwt.sign(
                 { id: decoded.id, email: decoded.email },
                 process.env.JWT_SECRET,
-                { expiresIn: "1h" },
+                { expiresIn: "1h" }
             );
-
-            // ✅ NOUVEAU access_token cookie
+            // Réécriture du cookie access_token
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "none",
-                maxAge: 60 * 60 * 1000, // 1h
+                sameSite: "lax",
+                maxAge: 60 * 60 * 1000,
             });
-
-            return res.json({ message: "Nouveau token généré" });
-        } catch (error) {
-            console.error("❌ Erreur refresh :", error.message);
-            return res.status(403).json({ message: "Refresh token invalide" });
+            res.json({ message: "Nouveau token généré" });
+        } catch {
+            res.status(403).json({
+                message: "Refresh token invalide ou expiré",
+            });
         }
     },
 
@@ -152,12 +148,12 @@ const userController = {
         res.clearCookie("access_token", {
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
         });
         res.clearCookie("refresh_token", {
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
         });
         res.json({ message: "Déconnexion effectuée" });
     },
