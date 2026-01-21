@@ -22,18 +22,25 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
+    // Test TOUS les cas possibles
+    const method = req.method || request.method || '';
     
     res.header('Access-Control-Allow-Origin', 'https://maestro-front-anthony.netlify.app');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     
-    if (req.method === 'OPTIONS') {
-        res.status(200).send('OK');
+    // ✅ Test MULTIPLE methods (maj/min)
+    if (method.toUpperCase() === 'OPTIONS' || method === 'options') {
+        console.log('✅ OPTIONS détecté:', method);
+        res.status(200).json({ message: 'OPTIONS OK' });
         return;
     }
+    
+    console.log('📥 Méthode reçue:', method);
     next();
 });
+
 
 app.use("/imagesUploads", express.static("imageUploads"));
 
