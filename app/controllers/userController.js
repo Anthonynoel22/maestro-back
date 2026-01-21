@@ -84,7 +84,7 @@ const userController = {
             res.cookie("access_token", accessToken, {
                 httpOnly: true, //  à true, il devient impossible d’y accéder depuis JS (front)
                 secure: true, //  Mettre true en production avec HTTPS
-                sameSite: "lax", // Protège contre certaines attaques CSRF
+                sameSite: "none", // Protège contre certaines attaques CSRF
                 maxAge: 60 * 60 * 1000, // 1 heure en millisecondes
             });
 
@@ -92,7 +92,7 @@ const userController = {
             res.cookie("refresh_token", refreshToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 7 * 24 * 60 * 60 * 1000, // 7 jours
             });
 
@@ -132,7 +132,7 @@ const userController = {
             res.cookie("access_token", newAccessToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 60 * 60 * 1000,
             });
             res.json({ message: "Nouveau token généré" });
@@ -148,12 +148,12 @@ const userController = {
         res.clearCookie("access_token", {
             httpOnly: true,
             secure: true,
-            sameSite: "lax",
+            sameSite: "none",
         });
         res.clearCookie("refresh_token", {
             httpOnly: true,
             secure: true,
-            sameSite: "lax",
+            sameSite: "none",
         });
         res.json({ message: "Déconnexion effectuée" });
     },
